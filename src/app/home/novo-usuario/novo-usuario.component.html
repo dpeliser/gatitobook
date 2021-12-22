@@ -1,0 +1,61 @@
+<h4 class="text-center">Registre-se e mostre seu ao mundo!</h4>
+
+<form class="form mt-4" [formGroup]="novoUsuarioForm" (submit)="cadastrar()">
+  <div class="form-group">
+    <input placeholder="E-mail" class="form-control" formControlName="email" />
+    <app-mensagem
+      *ngIf="email?.errors?.required && email?.touched"
+      mensagem="E-mail obrigatório"
+    ></app-mensagem>
+    <app-mensagem
+      *ngIf="email?.errors?.email && email?.touched"
+      mensagem="E-mail no formato incorreto"
+    ></app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      placeholder="Nome completo"
+      class="form-control"
+      formControlName="fullName"
+    />
+    <app-mensagem
+      *ngIf="fullName?.errors && fullName?.touched"
+      mensagem="Nome incorreto"
+    ></app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      placeholder="Usuário"
+      class="form-control"
+      formControlName="userName"
+    />
+    <app-mensagem
+      *ngIf="userName?.errors?.minusculo && userName?.touched"
+      mensagem="Usuário deve ser em letra minúscula"
+    ></app-mensagem>
+    <app-mensagem
+      *ngIf="userName?.errors?.usuarioExistente && userName?.touched"
+      mensagem="Usuário já existe"
+    ></app-mensagem>
+  </div>
+
+  <div class="form-group">
+    <input
+      type="password"
+      placeholder="Senha"
+      class="form-control"
+      formControlName="password"
+    />
+    <app-mensagem
+      *ngIf="novoUsuarioForm.errors?.senhaIgualUsuario"
+      mensagem="Senha deve ser diferente do usuário"
+    >
+    </app-mensagem>
+  </div>
+
+  <button class="btn btn-primary btn-block">Cadastrar</button>
+</form>
+
+<p>Já é um usuário? <a [routerLink]="['']">Faça login</a></p>
